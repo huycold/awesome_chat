@@ -1,4 +1,8 @@
-import mongoose from "mongoose";
+var mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost/awesome_chat', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 let Schema =mongoose.Schema;
 let UserSchema = new Schema({
     username:String,
@@ -27,4 +31,17 @@ let UserSchema = new Schema({
     updatedAt:{type:Number,defauld:null},
     deletedAt:{type:Number,default:null}
 });
-module.export=mongoose.model("user",UserSchema);
+UserSchema.statics={
+    createNew(item){
+        return this.create(item);
+    } ,
+    findByEmail(email){
+        return this.findOne({"local.email":email}).exec();
+    }
+ }
+var UserModel=mongoose.model("user",UserSchema);
+
+UserModel.find().then((data)=>{
+    console.log(data)
+})
+module.exports =UserModel;

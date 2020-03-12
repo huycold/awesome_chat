@@ -7,7 +7,7 @@ let register =[
     check("gender",transValidation.gender_err)
     .isIn(["male","female"]),
     check("password",transValidation.password_err)
-    .isLength({min:8}),
+    .isLength({min:3}),
     check("password_confirmation",transValidation.password_cf)
     .custom((value,{req})=>{
         return value ===req.body.password
