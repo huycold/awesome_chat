@@ -1,4 +1,5 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
+var bcrypt = require("bcrypt")
 mongoose.connect('mongodb://localhost/awesome_chat', {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -37,8 +38,16 @@ UserSchema.statics={
     } ,
     findByEmail(email){
         return this.findOne({"local.email":email}).exec();
+    },
+    findUserById(_id){
+        return this.findById(_id).exec();
     }
  }
+ UserSchema.methods={
+     comparePassword(password){
+         return bcrypt.compare(password,this.local.password)// return promise so sanh password
+     }
+    }
 var UserModel=mongoose.model("user",UserSchema);
 
 UserModel.find().then((data)=>{

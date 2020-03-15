@@ -5,6 +5,7 @@ import initRoutes from "./routes/web"
 import bodyParser  from "body-parser"
 import connectFlash from "connect-flash"
 import configSession from "./config/session"
+import passport from "passport";
 let app = express();
 //connect to mongo db
 ConnectDB();
@@ -15,6 +16,9 @@ configSession(app)
 configViewEngine(app)
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(connectFlash())
+//config passport
+app.use(passport.initialize());
+app.use(passport.session())
 let hostname="localhost";
 let port =3000;
 initRoutes(app)
