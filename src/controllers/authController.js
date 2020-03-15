@@ -6,6 +6,9 @@ let getLoginRegister =(req,res)=>{
         success:req.flash("success")
     })
 }
+let login =(req,res)=>{
+    return res.render("auth/login/login")
+}
 let postRegister = async(req,res)=>{
     let errorArray= [];
     let successArray =[]
@@ -26,7 +29,7 @@ let postRegister = async(req,res)=>{
         return res.redirect("/login-register")
     }
     try{
-        let createUserSuccess=await auth.register(req.body.email,req.body.gender,req.body.password)
+        let createUserSuccess=await auth.register(req.body.email,req.body.gender,req.body.password,req.protocol,req.get("host"))
         successArray.push(createUserSuccess)
         req.flash("success",successArray)
         return res.redirect("/login-register")
@@ -41,5 +44,6 @@ let postRegister = async(req,res)=>{
 }
 module.exports = {
     getLoginRegister:getLoginRegister,
-    postRegister:postRegister
+    postRegister:postRegister,
+    login:login
 }

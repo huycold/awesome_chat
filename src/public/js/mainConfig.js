@@ -10,7 +10,13 @@ function nineScrollLeft() {
     scrollspeed: 50
   });
 }
+function flashMaster(){
+    let notify = $(".master-success-message").text();
+    if(notify.length){
+      alertify.notify(notify,"success",7);
 
+    }
+}
 function nineScrollRight() {
   $('.right .chat').niceScroll({
     smoothscroll: true,
@@ -171,4 +177,5 @@ $(document).ready(function() {
 
   // Action hủy việc tạo nhóm trò chuyện
   cancelCreateGroup();
+  flashMaster()
 });
