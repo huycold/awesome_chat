@@ -1,5 +1,6 @@
 import {validationResult} from "express-validator/check"
 import {auth} from "./../services/index"
+import {transSuccess} from "./../../lang/vi"
 let getLoginRegister =(req,res)=>{
     return res.render("auth/master",{
         errors:req.flash("errors"),
@@ -42,8 +43,29 @@ let postRegister = async(req,res)=>{
     
     // console.log(req.body)
 }
+let getLogout =(req,res)=>{
+    req.logout();// xoa session passport
+    req.flash("success",transSuccess.logoutSuccess)
+    return res.redirect("/login-register")
+}
+let checkLoggedIn =(req,res,next)=>{
+    if(!req.isAuthenticated()){
+        return res.redirect("/login-register")
+    }
+    next()
+}
+let checkLoggedOut =(req,res,next)=>{
+    if(req.isAuthenticated()){
+        return res.redirect("/")
+    }
+    next()
+    
+}
 module.exports = {
     getLoginRegister:getLoginRegister,
     postRegister:postRegister,
-    login:login
+    login:login,
+    getLogout:getLogout,
+    checkLoggedIn:checkLoggedIn,
+    checkLoggedOut:checkLoggedOut
 }
