@@ -17,7 +17,8 @@ export const transSuccess ={
     },
     loginSuccess:(username)=>{
         return `xin chao ${username}`
-    }
+    },
+    logoutSuccess:"dang xuat tai khoan thanh cong"
 }
 export const transMail ={
     subject:"xac thuc tai khoan",
