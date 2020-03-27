@@ -1,4 +1,8 @@
-import mongoose from "mongoose";
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/awesome_chat', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 let Schema =mongoose.Schema;
 let ContactSchema = new Schema({
     userId:String,
@@ -11,6 +15,24 @@ let ContactSchema = new Schema({
 ContactSchema.statics={
    createNew(item){
        return this.create(item);
-   } 
+   } ,
+   findAllByUser(userId){
+      return this.find({
+        $or:[
+            {"userId":userId},
+            {"contactId":userId}
+        ]
+      }).exec()
+   }
+
 }
-module.export=mongoose.model("contact",ContactSchema);
+var ContactModel=mongoose.model("contact",ContactSchema);
+// ContactModel.createNew({
+//     userId:"huy",
+//     contactId:"123"
+// })
+// ContactModel.find()
+// .then((data)=>{
+//     console.log(data)
+// })
+module.exports =ContactModel
