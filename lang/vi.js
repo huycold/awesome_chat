@@ -2,13 +2,15 @@ export const transValidation ={
     email_err:"email sai ",
     gender_err:"sai ",
     password_err:" mat khau sai",
-    password_cf:"nhập mật khẩu chưa chính xác "
+    password_cf:"nhập mật khẩu chưa chính xác ",
+    keyword_find_user:" loi tim kiem khong chinh xac"
 }
 export const transErrors ={
     account_err:"email đã được sử dụng",
     isNotActive:"email chưa được kích hoạt",
     login_failed:"Sai tai khoan or mat khau",
-    server_error:"server loi kiem tra lai mang"
+    server_error:"server loi kiem tra lai mang",
+    avatar_type:"khong hop le"
 }
 export const transSuccess ={
 
@@ -18,6 +20,7 @@ export const transSuccess ={
     loginSuccess:(username)=>{
         return `xin chao ${username}`
     },
+    avatar_updated:"cap nhap thanh cong",
     logoutSuccess:"dang xuat tai khoan thanh cong"
 }
 export const transMail ={

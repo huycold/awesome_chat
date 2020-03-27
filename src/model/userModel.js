@@ -20,7 +20,7 @@ let UserSchema = new Schema({
     },
     facebook:{
         uid:String,
-        toke:String,
+        token:String,
         email:{type:String,trim:true}
     },
     google:{
@@ -36,11 +36,34 @@ UserSchema.statics={
     createNew(item){
         return this.create(item);
     } ,
+    updateUser(id,item){
+        return this.findByIdAndUpdate(id,item).exec();
+    },
     findByEmail(email){
         return this.findOne({"local.email":email}).exec();
     },
     findUserById(_id){
         return this.findById(_id).exec();
+    },
+    findByFacebookUid(uid){
+    return this.findOne({"facebook.uid":uid}).exec()
+    },
+    // tim user de tim kiem ban be
+    findUserForAddContact(deprecatedUserIds,keyword){
+        return this.find({
+            $and:[
+               {"_id":{$nin:deprecatedUserIds}},
+               {"local.isActive":true},
+               {$or:[
+                   {"username":{$regex:keyword}},
+                   {"local.email":{$regex:keyword}},
+                   {"facebook.email":{$regex:keyword}},
+                   {"google.email":{$regex:keyword}}
+               ]}
+            ]
+        },
+        // hien thi ra cac thong tin tra ve cho client
+        {_id:1,username:1,address:1,avater:1}).exec()
     }
  }
  UserSchema.methods={
@@ -50,7 +73,8 @@ UserSchema.statics={
     }
 var UserModel=mongoose.model("user",UserSchema);
 
-UserModel.find().then((data)=>{
-    console.log(data)
-})
+// UserModel.find().then((data)=>{
+//     console.log(data)
+// })
+console.log(UserModel._id)
 module.exports =UserModel;
