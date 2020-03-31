@@ -26,6 +26,8 @@ let initRoutes =(app)=>{
     router.get("/logout",auth.checkLoggedIn,auth.getLogout);
     router.put("/user/update-avatar",auth.checkLoggedIn,user.updateAvatar);
     router.get("/contact/find-users/:keyword",auth.checkLoggedIn,contact.findUsersContact)
+    router.post("/contact/add-new",auth.checkLoggedIn,contact.addNew)
+    router.delete("/contact/remove-request-contact",auth.checkLoggedIn,contact.removeRequestContact)
     return app.use("/",router)
 }
 module.exports=initRoutes;

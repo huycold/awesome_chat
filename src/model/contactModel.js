@@ -23,6 +23,30 @@ ContactSchema.statics={
             {"contactId":userId}
         ]
       }).exec()
+   },
+   //kiem tra ton tai cua 2 user xem la ban be hay chua
+   checkExists(userId,contactId){
+     return this.findOne({
+       $or:[{
+         $and:[
+           {"userId":userId},
+           {"contactId":contactId}
+         ],
+         $and:[
+          {"userId":contactId},
+          {"contactId":userId}
+        ]
+       }]
+     }).exec()
+   },
+   // xoa yeu cau ket ban
+   removeRequestContact(userId,contactId){
+    return this.remove({
+      $and:[
+        {"userId":userId},
+        {"contactId":contactId}
+      ]
+    }).exec()
    }
 
 }
