@@ -1,19 +1,17 @@
+import express from"express"
 import session from "express-session"
-// import connectMongo from "connect-mongo"
-// require("dotenv").config();
-// let MongoStore =connectMongo(session);
+import connectMongo from "connect-mongo"
 
+let app =express()
+require("dotenv").config();
+let MongoStore =connectMongo(session);
 
-// let sessionStore = new MongoStore({
-//     URL:`mongodb://localhost/awesome_chat`,
-//     autoReconnect:true
-// })
-
-let configSession =(app)=>{
+let sessionStore =new MongoStore({ url: 'mongodb://localhost/awesome_chat' })
+let config =(app)=>{
     app.use(session({
         key:"express.sid",
         secret:"mySecret",
-        // store:sessionStore,
+        store: sessionStore,
         resave:true,
         saveUninitialized:false,
         cookie:{
@@ -21,4 +19,7 @@ let configSession =(app)=>{
         }
     }))
 }
-module.exports = configSession
+module.exports ={
+    config:config,
+    sessionStore:sessionStore
+} ;
