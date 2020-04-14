@@ -22,3 +22,18 @@ function addContact(){
         })
     })
 }
+socket.on("response-add-new-contact",(user)=>{
+    // console.log("da nhan duoc soc ket")
+    let thongbao =`<span data-uid="${ user.id }">
+    <img class="avatar-small" src="../images/users/${user.avatar}" alt=""> 
+    <strong>${user.username}</strong> đã gửi cho bạn một lời mời kết bạn!
+</span><br><br><br>`
+    // console.log(thongbao)
+$(".noti_content").prepend(thongbao)
+// $( ".nti_content" ).append( "<p>Test</p>" );
+    addNumberContact("count-request-contact-received")
+   addNumberThongbao("noti_counter")
+   addNumberThongbao("noti_contact_counter")
+
+
+})
