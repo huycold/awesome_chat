@@ -12,8 +12,19 @@ function removeRequestContact(){
                 $("#find-user").find(`div.user-remove-request-contact[data-uid=${targetId}]`).hide()
                 $("#find-user").find(`div.user-add-new-contact[data-uid=${targetId}]`).css("display","inline")
                 UnAddNumberContact("count-request-contact-sent")
+                socket.emit("remove-request-contact",{contactId:targetId})
             }
            }
        })
     })
 }
+socket.on("response-request-contact",(user)=>{
+    console.log("da huy duoc yeu cau")
+   
+$( ".noti_content" ).find(`span[data-uid=${ user.id }]`).remove()
+    UnAddNumberContact("count-request-contact-received")
+    UnAddNumberThongbao("noti_counter")
+    UnAddNumberThongbao("noti_contact_counter")
+
+
+})
