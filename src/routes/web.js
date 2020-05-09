@@ -1,7 +1,7 @@
 import express from "express";
 import passport from "passport"
 import{authValidat} from "./../validation/index"
-import {home,auth,user,contact} from "./../controllers/index"
+import {home,auth,contact} from "./../controllers/index"
 import initPassportLocal from "../controllers/passportController/local"
 import initPassportFacebook from "../controllers/passportController/facebook"
 initPassportLocal()
@@ -24,7 +24,7 @@ let initRoutes =(app)=>{
         failureFlash:true
     }))
     router.get("/logout",auth.checkLoggedIn,auth.getLogout);
-    router.put("/user/update-avatar",auth.checkLoggedIn,user.updateAvatar);
+    // router.put("/user/update-avatar",auth.checkLoggedIn,user.updateAvatar);
     router.get("/contact/find-users/:keyword",auth.checkLoggedIn,contact.findUsersContact)
     router.post("/contact/add-new",auth.checkLoggedIn,contact.addNew)
     router.delete("/contact/remove-request-contact",auth.checkLoggedIn,contact.removeRequestContact)
