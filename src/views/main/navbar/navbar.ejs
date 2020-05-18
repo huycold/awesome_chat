@@ -53,6 +53,12 @@
                                         <img class="avatar-small" src="../images/users/default-avatar-trungquandev-02.jpg" alt=""> 
                                         <strong>Trung Quân</strong> đã gửi cho bạn một lời mời kết bạn!
                                     </span><br><br><br> -->
+                                    <% notifications.forEach(function(notification){
+                                        %>
+                                        <%- notification %>
+                                    <%});
+                        
+                                    %>
                                 </div>
                                 <div class="seeAll"><a href="#">Xem tất cả</a></div>
                             </div>
