@@ -25,7 +25,7 @@
     "fs-extra": "^7.0.1",
     "http": "0.0.1-security",
     "lodash": "^4.17.11",
-    "mongoose": "^4.13.9",
+    "mongoose": "^4.13.21",
     "multer": "^1.4.1",
     "nodemailer": "^4.4.2",
     "nodemon": "^2.0.2",
